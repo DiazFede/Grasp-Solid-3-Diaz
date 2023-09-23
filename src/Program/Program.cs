@@ -26,9 +26,11 @@ namespace Full_GRASP_And_SOLID
             recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
             recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
 
-            AllInOnePrinter printer = new AllInOnePrinter();
-            printer.PrintRecipe(recipe, Destination.Console);
-            printer.PrintRecipe(recipe, Destination.File);
+            IPrinter printer;
+            printer= new PrintInConsole();
+            printer.PrintRecipe(recipe);
+            printer=new PrintInFile();
+            printer.PrintRecipe(recipe);
         }
 
         private static void PopulateCatalogs()
@@ -72,5 +74,6 @@ namespace Full_GRASP_And_SOLID
             var query = from Equipment equipment in equipmentCatalog where equipment.Description == description select equipment;
             return query.FirstOrDefault();
         }
+
     }
 }
